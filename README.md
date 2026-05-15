@@ -1,5 +1,10 @@
 # ANVIL
 
+[![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C.svg?style=flat&logo=cplusplus&logoColor=white)](https://en.cppreference.com/w/cpp/20)
+[![CMake](https://img.shields.io/badge/CMake-3.25%2B-064F8C.svg?style=flat&logo=cmake&logoColor=white)](https://cmake.org/)
+[![vcpkg](https://img.shields.io/badge/vcpkg-manifest-0078D4.svg?style=flat)](https://vcpkg.io/)
+[![Tests](https://img.shields.io/badge/tests-33%2F33%20passing-success.svg)](#build--test)
+
 A limit order book matching engine and market-making backtester in C++20. Built file-by-file as a portfolio project; design decisions recorded in `PROJECT_LOG.md`.
 
 **Status:** Phase 1 (core matching engine) functionally complete. No benchmarks landed yet. Phases 2–5 unstarted.
