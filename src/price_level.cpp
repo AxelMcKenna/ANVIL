@@ -1,11 +1,8 @@
-#include "../include/anvil/price_level.hpp"
-
 #include <anvil/price_level.hpp>
 
 #include <cassert>
 #include <iterator>
 
-#include "../include/anvil/order.hpp"
 
 namespace anvil {
 
@@ -32,27 +29,27 @@ namespace anvil {
     }
 
     PriceLevel::iterator PriceLevel::enqueue(Order order) {
-        total_quantity += order.quantity();
+        total_quantity_ += order.quantity;
         orders_.push_back(order);
         return std::prev(orders_.end());
     }
 
     void PriceLevel::erase(iterator it) noexcept {
-        total_quantity -= it->quantity();
+        total_quantity_ -= it->quantity;
         orders_.erase(it);
     }
 
     void PriceLevel::pop_front() noexcept {
         assert(!orders_.empty());
-        total_quantity -= orders_.front().quantity();
+        total_quantity_ -= orders_.front().quantity;
         orders_.pop_front();
     }
 
-    void PriceLevel::reduce_front(Quantity qty) const noexcept {
+    void PriceLevel::reduce_front(Quantity qty) noexcept {
         assert(!orders_.empty());
-        assert(quantity < orders_.front().qty);
+        assert(qty < orders_.front().quantity);
         orders_.front().quantity -= qty;
-        total_quantity -= qty;
+        total_quantity_ -= qty;
     }
 
     PriceLevel::const_iterator PriceLevel::begin() const noexcept {

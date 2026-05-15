@@ -1,11 +1,9 @@
 #pragma once
 
-#include <cstdef>
+#include <cstddef>
 #include <list>
 
 #include <anvil/order.hpp>
-
-#include "../include/anvil/order.hpp"
 
 namespace anvil {
 
@@ -34,14 +32,14 @@ namespace anvil {
 
         // Reduce the front order's quantity (partial fill)
         // Precondition: !empty() && qty < front().quantity.
-        void reduce_front(Quantity quantity) const noexcept;
+        void reduce_front(Quantity quantity) noexcept;
 
         [[nodiscard]] const_iterator begin() const noexcept;
         [[nodiscard]] const_iterator end() const noexcept;
 
     private:
-        container_type orders;
-        Quantity total_quantity = 0;
+        container_type orders_;
+        Quantity total_quantity_ = 0;
     };
 
 }   // namespace anvil
