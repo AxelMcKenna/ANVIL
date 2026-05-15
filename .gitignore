@@ -1,0 +1,44 @@
+# Build output
+build/
+out/
+cmake-build-*/
+install/
+
+# vcpkg per-project install tree
+vcpkg_installed/
+
+# CMake state
+CMakeCache.txt
+CMakeFiles/
+CMakeUserPresets.json
+cmake_install.cmake
+compile_commands.json
+
+# IDE / editor
+.idea/
+.vscode/
+.cache/
+.clangd/
+*.swp
+*.swo
+.DS_Store
+
+# Compile artifacts
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.pdb
+*.dSYM/
+
+# Coverage
+*.gcov
+*.gcda
+*.gcno
+coverage/
+*.profraw
+*.profdata

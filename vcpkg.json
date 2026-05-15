@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "anvil",
+  "version-string": "0.1.0",
+  "description": "Limit order book matching engine and market-making backtester",
+  "dependencies": [
+    "gtest"
+  ]
+}
