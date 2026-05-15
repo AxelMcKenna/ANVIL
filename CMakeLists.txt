@@ -59,6 +59,7 @@ add_library(anvil STATIC
     src/price_level.cpp
     src/order_book.cpp
     src/lobster/parser.cpp
+    src/lobster/snapshot_parser.cpp
 )
 target_include_directories(anvil PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
