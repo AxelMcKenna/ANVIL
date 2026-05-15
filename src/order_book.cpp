@@ -137,7 +137,7 @@ namespace anvil {
                 const Order& resting = level.front();
                 const Quantity fill_qty = std::min(incoming.quantity, resting.quantity);
                 trades.push_back({
-                    .aggressive_id = incoming_id,
+                    .aggressive_id = incoming.id,
                     .resting_id = resting.id,
                     .price = level_price,
                     .timestamp = incoming.timestamp,
