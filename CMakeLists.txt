@@ -57,6 +57,7 @@ target_compile_options(anvil_warnings INTERFACE
 add_library(anvil STATIC
     src/version.cpp
     src/price_level.cpp
+    src/order_book.cpp
 )
 target_include_directories(anvil PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
