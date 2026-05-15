@@ -33,9 +33,20 @@ CMake project name: `anvil`. GitHub repo name: TBD (likely `anvil`).
 - [x] `benchmarks/order_book_bench.cpp` + `benchmarks/CMakeLists.txt` + `bench` CMake preset. Google Benchmark via vcpkg. Three benchmarks (`BM_AddOrder`, `BM_CancelOrder`, `BM_MatchOneLevel`). Match benchmark rewritten to pre-load resting orders outside the timed loop — removed ~2000 ns of pause/resume bias. macOS Intel numbers (loaded machine, **NOT README material**): add ~396, cancel ~142, match ~154 ns/op. Plausible Phase 3 hypothesis: add cost is allocator-bound (two-to-three heap allocs per call), not algorithm-bound (2026-05-15).
 - [ ] Google Benchmark baseline (add / cancel / match at 1M random orders) — Linux only.
 
+## Phase 2 — LOBSTER replay
+
+- [x] `include/anvil/lobster/message.hpp` — `Message` struct (32 bytes), `MessageType` and `Direction` enums, `to_side` helper. Kept LOBSTER's ×10000 price scale and `+1/-1` direction encoding on the wire; conversion to `anvil::Side` happens at the engine boundary (2026-05-15).
+- [x] `include/anvil/lobster/parser.hpp` + `src/lobster/parser.cpp` — CSV message parser. `std::from_chars` (locale-independent), int64-ns time parsed via dot-split (no `double`), stack-allocated field views (no per-line vector alloc), bounds-checked enum casts, line-numbered errors. Type-7 halt messages skipped silently (`-1` sentinel fields are incompatible with unsigned parsing) (2026-05-15).
+- [x] `tests/lobster_parser_test.cpp` — 13 cases: happy path for all 6 supported types, sell direction, fractional time padding, CR-stripping, halt-skipping, four error paths, line-number in error message. 46/46 passing (2026-05-15).
+- [ ] `include/anvil/lobster/snapshot.hpp` + `src/lobster/snapshot.cpp` — top-N snapshot type + LOBSTER orderbook-file parser.
+- [ ] `OrderBook::reduce_order` (Type 2 partial cancel) + `OrderBook::top_n_snapshot(n)`.
+- [ ] `include/anvil/lobster/replay.hpp` + `src/lobster/replay.cpp` — driver: stream messages → engine → verify snapshots.
+- [ ] `tests/lobster_parser_test.cpp` + tiny fixture CSVs.
+- [ ] `tests/lobster_replay_test.cpp` — end-to-end replay against fixture.
+- [ ] Run against real LOBSTER sample (AAPL one-day free download).
+
 ## Later phases (do not start)
 
-- Phase 2: LOBSTER replay harness — parser + tick-by-tick state validation.
 - Phase 3: Profile-driven optimisation. Only after `perf` / flamegraphs identify hot paths. No speculative rewriting.
 - Phase 4: Avellaneda–Stoikov market maker with inventory risk, realistic fill model (queue position, adverse selection, exchange latency). Sharpe / drawdown / turnover, sensitivity sweep over γ and κ.
 - Phase 5: Writeup. Honest assumptions section. Post-mortem.
