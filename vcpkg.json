@@ -4,6 +4,7 @@
   "version-string": "0.1.0",
   "description": "Limit order book matching engine and market-making backtester",
   "dependencies": [
-    "gtest"
+    "gtest",
+    "benchmark"
   ]
 }

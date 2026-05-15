@@ -23,6 +23,17 @@
       }
     },
     {
+      "name": "bench",
+      "inherits": "base",
+      "displayName": "Release build with benchmarks",
+      "binaryDir": "${sourceDir}/build/bench",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "ANVIL_BUILD_TESTS": "OFF",
+        "ANVIL_BUILD_BENCHMARKS": "ON"
+      }
+    },
+    {
       "name": "release",
       "inherits": "base",
       "displayName": "Release build (optimised)",
@@ -36,6 +47,7 @@
   ],
   "buildPresets": [
     { "name": "dev",     "configurePreset": "dev" },
+    { "name":  "bench",   "configurePreset": "bench" },
     { "name": "release", "configurePreset": "release" }
   ],
   "testPresets": [
